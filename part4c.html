@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture and Environment</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Agriculture and Environment</h2>
+        <a href="#" data-screen="0" class="active">Article 44</a>
+        <a href="#" data-screen="1">Article 45</a>
+        <a href="#" data-screen="2">Article 46</a>
+        <a href="#" data-screen="3">Article 47</a>
+        <a href="#" data-screen="4">Article 48</a>
+        <a href="#" data-screen="5">Article 48A</a>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Screens -->
+        <div class="screen active" id="screen1">
+            <h2>Article 44</h2>
+            <h1>Uniform Civil Code</h1>
+            <p>
+                <ul>
+                    <li>The State shall strive to implement a Uniform Civil Code (UCC) across the country to ensure uniform laws for all citizens, regardless of religion.</li>
+                </ul>
+            </p>
+        </div>
+        <div class="screen" id="screen2">
+            <h2>Article 45</h2>
+            <h1>Early Childhood Care and Education</h1>
+            <ul>
+                <li>The State shall provide free early childhood care and education for children under the age of six years.</li>
+            </ul>
+        </div>
+        <div class="screen" id="screen3">
+            <h2>Article 46</h2>
+            <h1>Promotion of Educational and Economic Interests of Weaker Sections</h1>
+            <ul>
+                <li>The State shall promote the interests of Scheduled Castes, Scheduled Tribes, and other weaker sections to protect them from exploitation.</li>
+            </ul>
+        </div>
+        <div class="screen" id="screen4">
+            <h2>Article 47</h2>
+            <h1>Duty of the State to Raise Nutrition and Health Standards</h1>
+            <ul>
+                <li>The State shall improve public health, nutrition, and living standards, and prohibit intoxicating substances except for medicinal purposes.</li>
+            </ul>
+        </div>
+        <div class="screen" id="screen5">
+            <h2>Article 48</h2>
+            <h1>Organization of Agriculture and Animal Husbandry</h1>
+            <ul>
+                <li>The State shall modernize agriculture and prohibit the slaughter of cows and calves to protect the environment and rural economy.</li>
+            </ul>
+        </div>
+        <div class="screen" id="screen6">
+            <h2>Article 48A</h2>
+            <h1>Protection and Improvement of Environment</h1>
+            <ul>
+                <li>The State shall protect forests, wildlife, and the environment.</li>
+            </ul>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="buttons">
+            <button id="prev" class="hidden">Previous</button>
+            <button id="next">Next</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle navigation
+        const screens = document.querySelectorAll('.screen');
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        let currentScreenIndex = 0;
+
+        function updateScreen() {
+            // Update screen visibility
+            screens.forEach((screen, index) => {
+                screen.classList.toggle('active', index === currentScreenIndex);
+            });
+
+            // Update sidebar link highlighting
+            sidebarLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === currentScreenIndex);
+            });
+
+            // Show/Hide buttons based on the current screen index
+            prevButton.classList.toggle('hidden', currentScreenIndex === 0);
+            nextButton.classList.toggle('hidden', currentScreenIndex === screens.length - 1);
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentScreenIndex > 0) {
+                currentScreenIndex--;
+                updateScreen();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentScreenIndex < screens.length - 1) {
+                currentScreenIndex++;
+                updateScreen();
+            }
+        });
+
+        sidebarLinks.forEach((link, index) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                currentScreenIndex = index;
+                updateScreen();
+            });
+        });
+
+        // Initialize the first screen as active
+        updateScreen();
+    </script>
+</body>
+</html>

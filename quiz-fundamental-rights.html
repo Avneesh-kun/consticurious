@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamental Rights Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F5F5DC;
+            padding: 2rem;
+        }
+
+        h1 {
+            color: #3C096C;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #FAEDCD;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .quiz-form h3 {
+            color: #3C096C;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-form label {
+            display: block;
+            margin: 1rem 0;
+            color: #000;
+        }
+
+        .quiz-form input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+
+        .quiz-form button {
+            background-color: #D4A373;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .quiz-form button:hover {
+            background-color: #3C096C;
+        }
+
+        .result {
+            margin-top: 2rem;
+            font-size: 18px;
+            color: #000;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fundamental Rights Quiz</h1>
+    <form class="quiz-form" id="quiz-form">
+        <h3>1. What is the fundamental right guaranteed under Article 19?</h3>
+        <label><input type="radio" name="q1" value="wrong"> Right to Education</label>
+        <label><input type="radio" name="q1" value="correct"> Right to Freedom</label>
+        <label><input type="radio" name="q1" value="wrong"> Right to Equality</label>
+
+        <h3>2. Which article prohibits discrimination based on religion, race, caste, sex, or place of birth?</h3>
+        <label><input type="radio" name="q2" value="correct"> Article 15</label>
+        <label><input type="radio" name="q2" value="wrong"> Article 17</label>
+        <label><input type="radio" name="q2" value="wrong"> Article 21</label>
+
+        <h3>3. What does Article 21 guarantee?</h3>
+        <label><input type="radio" name="q3" value="correct"> Right to Life and Personal Liberty</label>
+        <label><input type="radio" name="q3" value="wrong"> Right to Equality</label>
+        <label><input type="radio" name="q3" value="wrong"> Right to Property</label>
+
+        <h3>4. Which article provides for the abolition of untouchability?</h3>
+        <label><input type="radio" name="q4" value="wrong"> Article 14</label>
+        <label><input type="radio" name="q4" value="wrong"> Article 19</label>
+        <label><input type="radio" name="q4" value="correct"> Article 17</label>
+
+        <h3>5. Which article ensures the protection of cultural and educational rights?</h3>
+        <label><input type="radio" name="q5" value="correct"> Article 29 and 30</label>
+        <label><input type="radio" name="q5" value="wrong"> Article 32</label>
+        <label><input type="radio" name="q5" value="wrong"> Article 25</label>
+
+        <button type="button" onclick="calculateResult()">Submit</button>
+    </form>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        function calculateResult() {
+            const form = document.getElementById('quiz-form');
+            const resultDiv = document.getElementById('result');
+            const answers = form.querySelectorAll('input[type="radio"]:checked');
+            let score = 0;
+
+            // Calculate score
+            answers.forEach(answer => {
+                if (answer.value === 'correct') {
+                    score++;
+                }
+            });
+
+            // Display result
+            const totalQuestions = form.querySelectorAll('h3').length;
+            resultDiv.textContent = `You scored ${score} out of ${totalQuestions}. ${
+                score === totalQuestions ? 'Excellent!' : score > totalQuestions / 2 ? 'Well done!' : 'Keep learning!'
+            }`;
+        }
+    </script>
+</body>
+</html>

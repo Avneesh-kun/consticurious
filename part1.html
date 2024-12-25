@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Screen Navigation with Sidebar</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>Part I: <br>The Union and Its Territory</h3>
+        <a href="#" data-screen="0" class="active">Article 1</a>
+        <a href="#" data-screen="1">Article 2</a>
+        <a href="#" data-screen="2">Article 3</a>
+        <a href="#" data-screen="3">Article 4</a>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Screens -->
+        <div class="screen active" id="screen1">
+            <h2>Article 1</h2>
+            <h1>Name and Territory of the Union</h1>
+            <p>
+                <ul>
+                    <li>India, that is Bharat, shall be a Union of States.</li>
+                    <li>The territory of India includes:
+                        <ol>
+                            <li>Territories of the States,</li>
+                            <li>Union Territories,</li>
+                            <li>Any territories that may be acquired in the future.</li>
+                        </ol>
+                    </li>
+                </ul>
+            </p>
+        </div>
+        <div class="screen" id="screen2">
+            <h2>Article 2</h2>
+            <h1>Admission or Establishment of New States</h1>
+            <ul>
+                <li>Parliament has the power to admit new states into the Union of India.</li>
+                <li>Parliament can establish new states as needed.</li>
+            </ul>
+        </div>
+        <div class="screen" id="screen3">
+            <h2>Article 3</h2>
+            <h1>Formation of New States and Alteration of Boundaries</h1>
+            <ul>
+                    
+                <li>Parliament can:
+                    <ol>
+                        <li>Form a new state by separating territory from an existing state.</li>
+                        <li>Merge two or more states or parts of states.</li>
+                        <li>Alter the boundary or name of any state.</li>
+                    </ol>
+                </li>
+                <li>Such changes require the approval of Parliament, and the opinion of the affected state's legislature must be sought (though their consent is not mandatory).</li>
+            </ul>
+        </div>
+
+        <div class="screen" id="screen4">
+            <h2>Article 4</h2>
+            <h1>Laws Related to Article 2 and 3</h1>
+            <ul>
+                <li>Laws made under Articles 2 and 3 for forming new states or altering boundaries are not considered constitutional amendments, meaning they can be passed by a simple majority in Parliament.</li>
+                
+            </ul>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="buttons">
+            <button id="prev" class="hidden">Previous</button>
+            <button id="next">Next</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle navigation
+        const screens = document.querySelectorAll('.screen');
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        let currentScreenIndex = 0;
+
+        function updateScreen() {
+            // Update screen visibility
+            screens.forEach((screen, index) => {
+                screen.classList.toggle('active', index === currentScreenIndex);
+            });
+
+            // Update sidebar link highlighting
+            sidebarLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === currentScreenIndex);
+            });
+
+            // Show/Hide buttons based on the current screen index
+            prevButton.classList.toggle('hidden', currentScreenIndex === 0);
+            nextButton.classList.toggle('hidden', currentScreenIndex === screens.length - 1);
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentScreenIndex > 0) {
+                currentScreenIndex--;
+                updateScreen();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentScreenIndex < screens.length - 1) {
+                currentScreenIndex++;
+                updateScreen();
+            }
+        });
+
+        sidebarLinks.forEach((link, index) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                currentScreenIndex = index;
+                updateScreen();
+            });
+        });
+
+        // Initialize the first screen as active
+        updateScreen();
+    </script>
+</body>
+</html>

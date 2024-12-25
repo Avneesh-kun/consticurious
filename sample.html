@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Screen Navigation with Sidebar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .sidebar a.active {
+            background-color: #555;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .screen {
+            display: none;
+            padding: 20px;
+            height: 100vh;
+            background-color: #f4f4f4;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .screen.active {
+            display: flex;
+        }
+        .buttons {
+            margin-top: 20px;
+            position: absolute;
+            bottom: 20px;
+        }
+        button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>Screen Titles</h3>
+        <a href="#" data-screen="0" class="active">Screen 1</a>
+        <a href="#" data-screen="1">Screen 2</a>
+        <a href="#" data-screen="2">Screen 3</a>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Screens -->
+        <div class="screen active" id="screen1">
+            <h1>Screen 1</h1>
+            <p>This is the content of the first screen.</p>
+        </div>
+        <div class="screen" id="screen2">
+            <h1>Screen 2</h1>
+            <p>This is the content of the second screen.</p>
+        </div>
+        <div class="screen" id="screen3">
+            <h1>Screen 3</h1>
+            <p>This is the content of the third screen.</p>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="buttons">
+            <button id="prev" class="hidden">Previous</button>
+            <button id="next">Next</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle navigation
+        const screens = document.querySelectorAll('.screen');
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        let currentScreenIndex = 0;
+
+        function updateScreen() {
+            // Update screen visibility
+            screens.forEach((screen, index) => {
+                screen.classList.toggle('active', index === currentScreenIndex);
+            });
+
+            // Update sidebar link highlighting
+            sidebarLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === currentScreenIndex);
+            });
+
+            // Show/Hide buttons based on the current screen index
+            prevButton.classList.toggle('hidden', currentScreenIndex === 0);
+            nextButton.classList.toggle('hidden', currentScreenIndex === screens.length - 1);
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentScreenIndex > 0) {
+                currentScreenIndex--;
+                updateScreen();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentScreenIndex < screens.length - 1) {
+                currentScreenIndex++;
+                updateScreen();
+            }
+        });
+
+        sidebarLinks.forEach((link, index) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                currentScreenIndex = index;
+                updateScreen();
+            });
+        });
+
+        // Initialize the first screen as active
+        updateScreen();
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Right Against Exploitation</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Right Against Exploitation</h2>
+        <a href="#" data-screen="0" class="active">Article 23</a>
+        <a href="#" data-screen="1">Article 24</a>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Screens -->
+        <div class="screen active" id="screen1">
+            <h2>Article 23</h2>
+            <h1>Prohibition of Human Trafficking and Forced Labor</h1>
+            <p>
+                <ul>
+                    <li>Trafficking, forced labor, and begar (unpaid labor) are prohibited.</li>
+                </ul>
+            </p>
+        </div>
+        <div class="screen" id="screen2">
+            <h2>Article 24</h2>
+            <h1>Prohibition of Child Labor</h1>
+            <ul>
+                <li>Children below 14 cannot be employed in hazardous industries.</li>
+            </ul>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="buttons">
+            <button id="prev" class="hidden">Previous</button>
+            <button id="next">Next</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle navigation
+        const screens = document.querySelectorAll('.screen');
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        let currentScreenIndex = 0;
+
+        function updateScreen() {
+            // Update screen visibility
+            screens.forEach((screen, index) => {
+                screen.classList.toggle('active', index === currentScreenIndex);
+            });
+
+            // Update sidebar link highlighting
+            sidebarLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === currentScreenIndex);
+            });
+
+            // Show/Hide buttons based on the current screen index
+            prevButton.classList.toggle('hidden', currentScreenIndex === 0);
+            nextButton.classList.toggle('hidden', currentScreenIndex === screens.length - 1);
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentScreenIndex > 0) {
+                currentScreenIndex--;
+                updateScreen();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentScreenIndex < screens.length - 1) {
+                currentScreenIndex++;
+                updateScreen();
+            }
+        });
+
+        sidebarLinks.forEach((link, index) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                currentScreenIndex = index;
+                updateScreen();
+            });
+        });
+
+        // Initialize the first screen as active
+        updateScreen();
+    </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social and Economic Welfare</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Social and Economic Welfare</h2>
+        <a href="#" data-screen="0" class="active">Article 38</a>
+        <a href="#" data-screen="1">Article 39</a>
+        <a href="#" data-screen="2">Article 39A</a>
+        <a href="#" data-screen="3">Article 40</a>
+        <a href="#" data-screen="4">Article 41</a>
+        <a href="#" data-screen="5">Article 42</a>
+        <a href="#" data-screen="6">Article 43</a>
+        <a href="#" data-screen="7">Article 43A</a>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Screens -->
+        <div class="screen active" id="screen1">
+            <h2>Article 38</h2>
+            <h1>Promotion of Welfare</h1>
+            <p>
+                <ul>
+                    <li>The State shall strive to create a social order that ensures justice (social, economic, and political) for all.</li>
+                    <li>Reduce inequalities in income, status, and opportunities.</li>
+                </ul>
+            </p>
+        </div>
+        <div class="screen" id="screen2">
+            <h2>Article 39</h2>
+            <h1>Certain Principles of Policy</h1>
+            <ul>
+                <li>The State shall ensure:
+                    <ol>
+                        <li>Adequate means of livelihood for all citizens.</li>
+                        <li>Equal pay for equal work for men and women.</li>
+                        <li>Protection of children from exploitation and ensuring their development.</li>
+                        <li>Fair distribution of wealth and resources to avoid concentration in a few hands.</li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+        <div class="screen" id="screen3">
+            <h2>Article 39A</h2>
+            <h1>Equal Justice and Legal Aid</h1>
+            <ul>
+                <li>The State shall provide free legal aid to ensure equal access to justice for all citizens.</li>
+            </ul>
+        </div>
+        <div class="screen" id="screen4">
+            <h2>Article 40</h2>
+            <h1>Organization of Village Panchayats</h1>
+            <ul>
+                <li>The State shall promote village self-governance by organizing panchayats.</li>
+            </ul>
+        </div>
+        <div class="screen" id="screen5">
+            <h2>Article 41</h2>
+            <h1>Right to Work, Education, and Public Assistance</h1>
+            <ul>
+                <li>The State shall provide the right to work, education, and assistance for the unemployed, sick, and elderly, depending on its resources.</li>
+            </ul>
+        </div>
+        <div class="screen" id="screen6">
+            <h2>Article 42</h2>
+            <h1>Just and Humane Conditions of Work and Maternity Relief</h1>
+            <ul>
+                <li>The State shall ensure safe and humane working conditions and provide maternity relief.</li>
+            </ul>
+        </div>
+        <div class="screen" id="screen7">
+            <h2>Article 43</h2>
+            <h1>Living Wage for Workers</h1>
+            <ul>
+                <li>Workers shall receive a fair living wage, decent working conditions, and access to social and cultural opportunities.</li>
+            </ul>
+        </div>
+        <div class="screen" id="screen8">
+            <h2>Article 43A</h2>
+            <h1>Workers’ Participation in Management</h1>
+            <ul>
+                <li>The State shall promote workers' participation in the management of industries.</li>
+            </ul>
+        </div>
+
+
+
+        <!-- Navigation Buttons -->
+        <div class="buttons">
+            <button id="prev" class="hidden">Previous</button>
+            <button id="next">Next</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle navigation
+        const screens = document.querySelectorAll('.screen');
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        let currentScreenIndex = 0;
+
+        function updateScreen() {
+            // Update screen visibility
+            screens.forEach((screen, index) => {
+                screen.classList.toggle('active', index === currentScreenIndex);
+            });
+
+            // Update sidebar link highlighting
+            sidebarLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === currentScreenIndex);
+            });
+
+            // Show/Hide buttons based on the current screen index
+            prevButton.classList.toggle('hidden', currentScreenIndex === 0);
+            nextButton.classList.toggle('hidden', currentScreenIndex === screens.length - 1);
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentScreenIndex > 0) {
+                currentScreenIndex--;
+                updateScreen();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentScreenIndex < screens.length - 1) {
+                currentScreenIndex++;
+                updateScreen();
+            }
+        });
+
+        sidebarLinks.forEach((link, index) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                currentScreenIndex = index;
+                updateScreen();
+            });
+        });
+
+        // Initialize the first screen as active
+        updateScreen();
+    </script>
+</body>
+</html>

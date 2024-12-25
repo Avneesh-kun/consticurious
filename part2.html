@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Screen Navigation with Sidebar</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>Part II: Citizenship</h3>
+        <a href="#" data-screen="0" class="active">Article 5</a>
+        <a href="#" data-screen="1">Article 6</a>
+        <a href="#" data-screen="2">Article 7</a>
+        <a href="#" data-screen="2">Article 8</a>
+        <a href="#" data-screen="2">Article 9</a>
+        <a href="#" data-screen="2">Article 10</a>
+        <a href="#" data-screen="2">Article 11</a>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Screens -->
+        <div class="screen active" id="screen1">
+            <h2>Article 5</h2>
+            <h1>Citizenship at the Commencement of the Constitution</h1>
+            <p>
+                <ul>
+                    
+                    <li>Any person who had their domicile (permanent residence) in India and:
+                        <ol>
+                            <li>Was born in India,</li>
+                            <li>Or had either parent born in India,</li>
+                            <li>Or had been an ordinary resident in India for at least 5 years before the Constitution came into force,
+                                automatically became a citizen of India.</li>
+                        </ol>
+                    </li>
+                </ul>
+            </p>
+        </div>
+
+        <div class="screen active" id="screen2">
+            <h2>Article 6</h2>
+            <h1>Rights of People Who Migrated from Pakistan</h1>
+            <p>
+                <ul>
+                    
+                    <li>People who migrated from Pakistan to India before July 19, 1948, became Indian citizens if :
+                        <ol>
+                            <li>They resided in India since their migration.</li>
+                            
+                        </ol>
+                    </li>
+                    <li>People who migrated after this date could still become citizens if :
+                        <ol>
+                            <li>They registered as citizens of India after living in India for at least 6 months.</li>
+                            
+                        </ol>
+                    </li>
+                </ul>
+            </p>
+        </div>
+
+        <div class="screen active" id="screen3">
+            <h2>Article 7</h2>
+            <h1>Rights of People Who Migrated to Pakistan and Returned</h1>
+            <p>
+                <ul>
+                    
+                    <li>If a person migrated to Pakistan after March 1, 1947, but later returned to India, they could become an Indian citizen if they had permission from Indian authorities to resettle.</li>
+                    
+                </ul>
+            </p>
+        </div>
+
+        <div class="screen active" id="screen4">
+            <h2>Article 8</h2>
+            <h1>Citizenship for Indians Living Abroad</h1>
+            <p>
+                <ul>
+                    
+                    <li>A person born in India or with Indian parentage, living outside India, could register as an Indian citizen at the Indian embassy or consulate in their country.</li>
+                   
+                </ul>
+            </p>
+        </div>
+
+        <div class="screen active" id="screen5">
+            <h2>Article 9</h2>
+            <h1>Loss of Citizenship by Acquiring Foreign Citizenship</h1>
+            <p>
+                <ul>
+                    <li>A person who voluntarily acquired the citizenship of another country after January 26, 1950, automatically lost their Indian citizenship.</li>
+                </ul>
+            </p>
+        </div>
+
+        <div class="screen active" id="screen6">
+            <h2>Article 10</h2>
+            <h1>Continuance of Citizenship</h1>
+            <p>
+                <ul>
+                    
+                    <li>Any person who is a citizen of India under the Constitution continues to be a citizen unless disqualified by a law made by Parliament.</li>
+                    
+                </ul>
+            </p>
+        </div><div class="screen active" id="screen7">
+            <h2>Article 11</h2>
+            <h1>Parliament’s Power to Regulate Citizenship</h1>
+            <p>
+                <ul>
+                    
+                    <li>Parliament has the authority to make laws regarding the acquisition, termination, and other matters related to citizenship.</li>
+                    
+                </ul>
+            </p>
+        </div>
+
+
+        <!-- Navigation Buttons -->
+        <div class="buttons">
+            <button id="prev" class="hidden">Previous</button>
+            <button id="next">Next</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle navigation
+        const screens = document.querySelectorAll('.screen');
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        let currentScreenIndex = 0;
+
+        function updateScreen() {
+            // Update screen visibility
+            screens.forEach((screen, index) => {
+                screen.classList.toggle('active', index === currentScreenIndex);
+            });
+
+            // Update sidebar link highlighting
+            sidebarLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === currentScreenIndex);
+            });
+
+            // Show/Hide buttons based on the current screen index
+            prevButton.classList.toggle('hidden', currentScreenIndex === 0);
+            nextButton.classList.toggle('hidden', currentScreenIndex === screens.length - 1);
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentScreenIndex > 0) {
+                currentScreenIndex--;
+                updateScreen();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentScreenIndex < screens.length - 1) {
+                currentScreenIndex++;
+                updateScreen();
+            }
+        });
+
+        sidebarLinks.forEach((link, index) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                currentScreenIndex = index;
+                updateScreen();
+            });
+        });
+
+        // Initialize the first screen as active
+        updateScreen();
+    </script>
+</body>
+</html>

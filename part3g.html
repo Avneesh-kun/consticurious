@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Right to Constitutional Remedies</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Right to Constitutional Remedies</h2>
+        <a href="#" data-screen="0" class="active">Article 32</a>
+        <a href="#" data-screen="1">Article 33</a>
+        <a href="#" data-screen="1">Article 34</a>
+        <a href="#" data-screen="1">Article 35</a>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Screens -->
+        <div class="screen active" id="screen1">
+            <h2>Article 32</h2>
+            <h1>Right to Approach the Supreme Court</h1>
+            <p>
+                <ul>
+                    <li>Citizens can directly approach the Supreme Court if their Fundamental Rights are violated.</li>
+                    <li>The court can issue five types of writs to enforce rights: <b>Habeas Corpus, Mandamus, Prohibition, Quo Warranto, and Certiorari</b>.</li>
+                </ul>
+            </p>
+        </div>
+        <div class="screen" id="screen2">
+            <h2>Article 33</h2>
+            <h1>Restriction on Fundamental Rights for Armed Forces</h1>
+            <ul>
+                <li>Parliament can restrict Fundamental Rights for armed forces to ensure discipline and security.</li>
+            </ul>
+        </div>
+        <div class="screen" id="screen3">
+            <h2>Article 34</h2>
+            <h1>Suspension of Rights During Martial Law</h1>
+            <ul>
+                <li>Fundamental Rights may be restricted in areas where martial law is declared.</li>
+            </ul>
+        </div>
+        <div class="screen" id="screen4">
+            <h2>Article 35</h2>
+            <h1>Power to Make Laws to Enforce Rights</h1>
+            <ul>
+                <li>Parliament can make laws to enforce certain Fundamental Rights.</li>
+            </ul>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="buttons">
+            <button id="prev" class="hidden">Previous</button>
+            <button id="next">Next</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle navigation
+        const screens = document.querySelectorAll('.screen');
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        let currentScreenIndex = 0;
+
+        function updateScreen() {
+            // Update screen visibility
+            screens.forEach((screen, index) => {
+                screen.classList.toggle('active', index === currentScreenIndex);
+            });
+
+            // Update sidebar link highlighting
+            sidebarLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === currentScreenIndex);
+            });
+
+            // Show/Hide buttons based on the current screen index
+            prevButton.classList.toggle('hidden', currentScreenIndex === 0);
+            nextButton.classList.toggle('hidden', currentScreenIndex === screens.length - 1);
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentScreenIndex > 0) {
+                currentScreenIndex--;
+                updateScreen();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentScreenIndex < screens.length - 1) {
+                currentScreenIndex++;
+                updateScreen();
+            }
+        });
+
+        sidebarLinks.forEach((link, index) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                currentScreenIndex = index;
+                updateScreen();
+            });
+        });
+
+        // Initialize the first screen as active
+        updateScreen();
+    </script>
+</body>
+</html>

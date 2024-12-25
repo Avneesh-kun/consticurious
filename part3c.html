@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Right to Freedom</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>Right to Freedom</h3>
+        <a href="#" data-screen="0" class="active">Article 19</a>
+        <a href="#" data-screen="1">Article 20</a>
+        <a href="#" data-screen="2">Article 21</a>
+        <a href="#" data-screen="3">Article 21A</a>
+        <a href="#" data-screen="4">Article 22</a>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Screens -->
+        <div class="screen active" id="screen1">
+            <h2>Article 19</h2>
+            <h1>Protection of Six Freedoms</h1>
+            <p>
+                <ul>
+                    
+                    <li>Citizens have the right to:
+                        <ol>
+                            <li>Freedom of speech and expression.</li>
+                            <li>Assemble peacefully without arms.</li>
+                            <li>Form associations or unions.</li>
+                            <li>Move freely across India.</li>
+                            <li>Reside and settle in any part of India.</li>
+                            <li>Practice any profession or business.</li>
+                        </ol>
+                    </li>
+                    <li>These freedoms are subject to reasonable restrictions (e.g., for public order).</li>
+                </ul>
+            </p>
+        </div>
+        <div class="screen" id="screen2">
+            <h2>Article 20</h2>
+            <h1>Protection in Respect of Convictions</h1>
+            <ul>
+                <li>No person can be:
+                    <ol>
+                        <li>Punished under laws that were not in force at the time of the offense (no retrospective punishment).</li>
+                        <li>Tried for the same offense twice (no double jeopardy).</li>
+                        <li>Forced to incriminate themselves.</li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+        <div class="screen" id="screen3">
+            <h2>Article 21</h2>
+            <h1>Protection of Life and Personal Liberty</h1>
+            <ul>
+                <li>No one can be deprived of life or liberty except according to a legal process.</li>
+            </ul>
+        </div>
+
+        <div class="screen" id="screen4">
+            <h2>Article 21A</h2>
+            <h1>Right to Education</h1>
+            <ul>
+                <li>Children aged 6-14 have the right to free and compulsory education.</li>    
+            </ul>
+        </div>
+        <div class="screen" id="screen5">
+            <h2>Article 22</h2>
+            <h1>Protection Against Arrest and Detention</h1>
+            <ul>
+                <li>Provides safeguards against arbitrary arrest and detention, especially preventive detention (limited to specific circumstances).</li>    
+            </ul>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="buttons">
+            <button id="prev" class="hidden">Previous</button>
+            <button id="next">Next</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle navigation
+        const screens = document.querySelectorAll('.screen');
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        let currentScreenIndex = 0;
+
+        function updateScreen() {
+            // Update screen visibility
+            screens.forEach((screen, index) => {
+                screen.classList.toggle('active', index === currentScreenIndex);
+            });
+
+            // Update sidebar link highlighting
+            sidebarLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === currentScreenIndex);
+            });
+
+            // Show/Hide buttons based on the current screen index
+            prevButton.classList.toggle('hidden', currentScreenIndex === 0);
+            nextButton.classList.toggle('hidden', currentScreenIndex === screens.length - 1);
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentScreenIndex > 0) {
+                currentScreenIndex--;
+                updateScreen();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentScreenIndex < screens.length - 1) {
+                currentScreenIndex++;
+                updateScreen();
+            }
+        });
+
+        sidebarLinks.forEach((link, index) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                currentScreenIndex = index;
+                updateScreen();
+            });
+        });
+
+        // Initialize the first screen as active
+        updateScreen();
+    </script>
+</body>
+</html>
